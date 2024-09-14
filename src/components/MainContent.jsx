@@ -10,35 +10,51 @@ export default function MainContent() {
         }
     });
 
+    const [formData, setFormData] = useState({
+        'Name': '',
+        'Email': '',
+        'Phone': ''
+    });
+
+    const [isSubmitted, setIsSubmitted] = useState(false); // Track if form was submitted
+
     return (
         <main>
             <ControlsPanel 
                 cvData={cvData}
                 setCvData={setCvData}
+                formData={formData}
+                setFormData={setFormData}
+                isSubmitted={isSubmitted}
+                setIsSubmitted={setIsSubmitted}
             />
             <CVViewer cvData={cvData} />
         </main>
     );
 }
 
-function ControlsPanel({ cvData, setCvData }) {
+function ControlsPanel({ cvData, setCvData, formData, setFormData, isSubmitted, setIsSubmitted }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Update the state based on the input change
-        setCvData(prevState => ({
-            ...prevState,
-            personalDetails: {
-                ...prevState.personalDetails,
-                [name]: value // Dynamically update the corresponding field
-            }
+        // Update the local form data
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value
         }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission (optional)
+        // Update the main state with the form data on submit
+        setCvData(prevCvData => ({
+            ...prevCvData,
+            personalDetails: formData
+        }));
+
+        // Set the form as submitted
+        setIsSubmitted(true);
     };
 
     return (
@@ -51,7 +67,8 @@ function ControlsPanel({ cvData, setCvData }) {
                         <input
                             id={key}
                             name={key}
-                            value={cvData.personalDetails[key]}
+                            placeholder={cvData.personalDetails[key]} // Initial placeholder
+                            value={formData[key]}  // Show value only after submit
                             onChange={handleChange}
                         />
                     </div>
