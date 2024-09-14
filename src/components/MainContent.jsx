@@ -16,7 +16,6 @@ export default function MainContent() {
         'Phone': ''
     });
 
-    const [isSubmitted, setIsSubmitted] = useState(false); // Track if form was submitted
 
     return (
         <main>
@@ -25,15 +24,13 @@ export default function MainContent() {
                 setCvData={setCvData}
                 formData={formData}
                 setFormData={setFormData}
-                isSubmitted={isSubmitted}
-                setIsSubmitted={setIsSubmitted}
             />
             <CVViewer cvData={cvData} />
         </main>
     );
 }
 
-function ControlsPanel({ cvData, setCvData, formData, setFormData, isSubmitted, setIsSubmitted }) {
+function ControlsPanel({ cvData, setCvData, formData, setFormData}) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,9 +49,6 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData, isSubmitted, 
             ...prevCvData,
             personalDetails: formData
         }));
-
-        // Set the form as submitted
-        setIsSubmitted(true);
     };
 
     return (
@@ -67,6 +61,7 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData, isSubmitted, 
                         <input
                             id={key}
                             name={key}
+                            type={key === 'Email' ? 'email' : key === 'Phone' ? 'number' : 'text'}                            
                             placeholder={cvData.personalDetails[key]} // Initial placeholder
                             value={formData[key]}  // Show value only after submit
                             onChange={handleChange}
