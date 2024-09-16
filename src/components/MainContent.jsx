@@ -16,9 +16,16 @@ export default function MainContent() {
     });
 
     const [formData, setFormData] = useState({
-        'Name': '',
-        'Email': '',
-        'Phone': ''
+        personalDetails: {
+            'Name': '',
+            'Email': '',
+            'Phone': ''
+        },
+        educationExperience: {
+            'University/School': '',
+            'Course/Subject': '',
+            'Responsibilities' : [],
+        }
     });
 
 
@@ -35,7 +42,7 @@ export default function MainContent() {
     );
 }
 
-function ControlsPanel({ cvData, setCvData, formData, setFormData}) {
+function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,23 +50,26 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData}) {
         // Update the local form data
         setFormData(prevFormData => ({
             ...prevFormData,
-            [name]: value
+            [e.target.dataset.section]: {
+                ...prevFormData[e.target.dataset.section],
+                [name]: value
+            }
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (section) => (e) => {
         e.preventDefault();
-        // Update the main state with the form data on submit
         setCvData(prevCvData => ({
             ...prevCvData,
-            personalDetails: formData
+            [section]: formData[section]
         }));
     };
 
     return (
+        <>
         <section>
             <h2>Personal Details:</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit('personalDetails')}>
                 {Object.keys(cvData.personalDetails).map((key) => (
                     <div key={key}>
                         <label htmlFor={key}>{key}:</label>
@@ -68,16 +78,39 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData}) {
                             name={key}
                             type={key === 'Email' ? 'email' : key === 'Phone' ? 'tel' : 'text'}                            
                             placeholder={cvData.personalDetails[key]} // Initial placeholder
-                            value={formData[key]}  // Show value only after submit
+                            value={formData.personalDetails[key] || ''}  // Handle empty values
                             onChange={handleChange}
+                            data-section="personalDetails" // Custom data attribute to identify section
                         />
                     </div>
                 ))}
-                <input type="submit" value="Update" />
+                <input type="submit" value="Update Personal Details" />
             </form>
         </section>
+        <section>
+            <h2>Education</h2>
+            <form onSubmit={handleSubmit('educationExperience')}>
+                {Object.keys(cvData.educationExperience).map((key) => (
+                    <div key={key}>
+                        <label htmlFor={key}>{key}:</label>
+                        <input
+                            id={key}
+                            name={key}
+                            type="text"
+                            placeholder={cvData.educationExperience[key]} // Initial placeholder
+                            value={formData.educationExperience[key] || ''}  // Handle empty values
+                            onChange={handleChange}
+                            data-section="educationExperience" // Custom data attribute to identify section
+                        />
+                    </div>
+                ))}
+                <input type="submit" value="Update Education" />
+            </form>
+        </section>
+        </>
     );
 }
+
 
 function CVViewer({ cvData }) {
     return (
