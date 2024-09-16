@@ -6,7 +6,12 @@ export default function MainContent() {
         personalDetails: {
             'Name': 'John Smith',
             'Email': 'john.smith@gmail.com',
-            'Phone': '7123456789'
+            'Phone': '07123456789'
+        },
+        educationExperience: {
+            'University/School': 'University of Life',
+            'Course/Subject': 'Computer Science',
+            'Responsibilities' : ['Developed strong proficiency in programming languages such as Python, Java, and C++ through coursework and personal projects.', 'Designed and implemented a database management system using SQL and NoSQL technologies for a university capstone project.', 'Collaborated with a team to build a mobile application using React Native, enhancing both frontend and backend skills.', 'Conducted research on machine learning algorithms, resulting in the development of a predictive model with 85% accuracy for classifying data.', 'Utilized version control tools like Git to manage and collaborate on code, contributing to multiple open-source projects.'],
         }
     });
 
