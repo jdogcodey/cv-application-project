@@ -6,7 +6,7 @@ export default function MainContent() {
         personalDetails: {
             'Name': 'John Smith',
             'Email': 'john.smith@gmail.com',
-            'Phone': '07123456789'
+            'Phone': '7123456789'
         }
     });
 
@@ -61,7 +61,7 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData}) {
                         <input
                             id={key}
                             name={key}
-                            type={key === 'Email' ? 'email' : key === 'Phone' ? 'number' : 'text'}                            
+                            type={key === 'Email' ? 'email' : key === 'Phone' ? 'tel' : 'text'}                            
                             placeholder={cvData.personalDetails[key]} // Initial placeholder
                             value={formData[key]}  // Show value only after submit
                             onChange={handleChange}
