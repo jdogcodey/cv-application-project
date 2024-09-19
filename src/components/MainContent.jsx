@@ -70,7 +70,7 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
             {Object.keys(cvData).map((cvKey) => (
                 <section key={cvKey}>
                     <h2>{cvKey}:</h2>
-                    <form onSubmit={handleSubmit({cvKey})}>
+                    <form onSubmit={handleSubmit(cvKey)}>
                         {Object.keys(cvData[cvKey]).map((key) => (
                             <div key={key}>
                                 <label htmlFor={key}>{key}:</label>
