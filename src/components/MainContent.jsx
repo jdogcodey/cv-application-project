@@ -74,6 +74,21 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
                         {Object.keys(cvData[cvKey]).map((key) => (
                             <div key={key}>
                                 <label htmlFor={key}>{key}:</label>
+                                {Array.isArray(cvData[cvKey][key]) ? (
+                                cvData[cvKey][key].map((item, index) => (
+                                    <input
+                                        key={index}
+                                        id={item}
+                                        name={item}
+                                        type='textarea'
+                                        placeholder={cvData[cvKey][key][index]}
+                                        value={formData[cvKey][key][index]}
+                                        onChange={handleChange}
+                                        data-section={cvKey}
+                                    />
+                                ))
+                            )
+                                : 
                                 <input
                                     id={key}
                                     name={key}
@@ -82,7 +97,7 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
                                     value={formData[cvKey][key]}
                                     onChange={handleChange}
                                     data-section={cvKey}
-                                    />
+                                    />}
                             </div>
                         ))}
                          <input type='submit' value={cvKey} />
