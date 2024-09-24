@@ -44,22 +44,46 @@ export default function MainContent() {
 
 function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
 
-    const handleChange = (e) => {
+    const handleChange = (cvItem, index) => (e) => {
         const { name, value } = e.target;
+        console.log(name)
+        console.log(value)
+        console.log(index)
+        console.log(cvData[e.target.dataset.section][cvItem][index])
 
-        // Update the local form data
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            [e.target.dataset.section]: {
-                ...prevFormData[e.target.dataset.section],
-                [name]: value
-            }
-        }));
+        setFormData(Array.isArray(formData[e.target.dataset.section][cvItem]) ? 
+                prevFormData => {
+    const updatedArray = [
+        ...prevFormData[e.target.dataset.section][cvItem].slice(0, index), // Items before the index
+        value, // New value to insert
+        ...prevFormData[e.target.dataset.section][cvItem].slice(index + 1) // Items after the index
+    ];
+
+    return {
+        ...prevFormData,
+        [e.target.dataset.section]: {
+            ...prevFormData[e.target.dataset.section],
+            [cvItem]: updatedArray // Update the section with the new array
+        }
+    };
+}
+        :
+            prevFormData => ({
+                    ...prevFormData,
+                    [e.target.dataset.section]: {
+                        ...prevFormData[e.target.dataset.section],
+                        [name]: value
+                    }
+                }))
     };
 
     const handleSubmit = (section) => (e) => {
+        console.log(cvData)
+        console.log(formData)
         e.preventDefault();
-        setCvData(prevCvData => ({
+        setCvData(Array.isArray()
+            
+            prevCvData => ({
             ...prevCvData,
             [section]: formData[section]
         }));
@@ -83,7 +107,7 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
                                         type='textarea'
                                         placeholder={cvData[cvKey][key][index]}
                                         value={formData[cvKey][key][index]}
-                                        onChange={handleChange}
+                                        onChange={handleChange(key, index)}
                                         data-section={cvKey}
                                     />
                                 ))
@@ -95,7 +119,7 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
                                     type={key === 'Email' ? 'email' : key === 'Phone' ? 'tel' : 'text'}
                                     placeholder={cvData[cvKey][key]}
                                     value={formData[cvKey][key]}
-                                    onChange={handleChange}
+                                    onChange={handleChange(key)}
                                     data-section={cvKey}
                                     />}
                             </div>
