@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function MainContent() {
 
@@ -11,23 +11,40 @@ export default function MainContent() {
         'Education Experience': {
             'University/School': 'University of Life',
             'Course/Subject': 'Computer Science',
-            'Responsibilities' : ['Developed strong proficiency in programming languages such as Python, Java, and C++ through coursework and personal projects.', 'Designed and implemented a database management system using SQL and NoSQL technologies for a university capstone project.', 'Collaborated with a team to build a mobile application using React Native, enhancing both frontend and backend skills.', 'Conducted research on machine learning algorithms, resulting in the development of a predictive model with 85% accuracy for classifying data.', 'Utilized version control tools like Git to manage and collaborate on code, contributing to multiple open-source projects.'],
+            'Responsibilities' : [
+                'Developed strong proficiency in programming languages such as Python, Java, and C++ through coursework and personal projects.', 
+                'Designed and implemented a database management system using SQL and NoSQL technologies for a university capstone project.', 
+                'Collaborated with a team to build a mobile application using React Native, enhancing both frontend and backend skills.'
+            ],
         }
     });
 
-    const [formData, setFormData] = useState({
-        'Personal Details': {
-            'Name': '',
-            'Email': '',
-            'Phone': ''
-        },
-        'Education Experience': {
-            'University/School': '',
-            'Course/Subject': '',
-            'Responsibilities' : [],
-        }
-    });
+    const [formData, setFormData] = useState(null);
 
+    // Sync formData with cvData when the component mounts
+    useEffect(() => {
+        const initializeFormData = () => {
+            const newFormData = {};
+            Object.keys(cvData).forEach((section) => {
+                newFormData[section] = {};
+                Object.keys(cvData[section]).forEach((key) => {
+                    if (Array.isArray(cvData[section][key])) {
+                        // Copy the array structure from cvData to formData
+                        newFormData[section][key] = [...cvData[section][key]];
+                    } else {
+                        newFormData[section][key] = '';  // Initialize other fields with empty strings
+                    }
+                });
+            });
+            setFormData(newFormData);
+        };
+
+        initializeFormData();
+    }, [cvData]);
+
+    if (!formData) {
+        return <div>Loading...</div>; // Ensure that formData is initialized before rendering
+    }
 
     return (
         <main>
@@ -45,45 +62,59 @@ export default function MainContent() {
 function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
 
     const handleChange = (cvItem, index) => (e) => {
-        const { name, value } = e.target;
-        console.log(name)
-        console.log(value)
-        console.log(index)
-        console.log(cvData[e.target.dataset.section][cvItem][index])
+        const { value } = e.target;
 
-        setFormData(Array.isArray(formData[e.target.dataset.section][cvItem]) ? 
-                prevFormData => {
-    const updatedArray = [
-        ...prevFormData[e.target.dataset.section][cvItem].slice(0, index), // Items before the index
-        value, // New value to insert
-        ...prevFormData[e.target.dataset.section][cvItem].slice(index + 1) // Items after the index
-    ];
+        setFormData(prevFormData => {
+            const updatedArray = [
+                ...prevFormData[e.target.dataset.section][cvItem].slice(0, index),
+                value,
+                ...prevFormData[e.target.dataset.section][cvItem].slice(index + 1)
+            ];
 
-    return {
-        ...prevFormData,
-        [e.target.dataset.section]: {
-            ...prevFormData[e.target.dataset.section],
-            [cvItem]: updatedArray // Update the section with the new array
-        }
+            return {
+                ...prevFormData,
+                [e.target.dataset.section]: {
+                    ...prevFormData[e.target.dataset.section],
+                    [cvItem]: updatedArray
+                }
+            };
+        });
     };
-}
-        :
-            prevFormData => ({
-                    ...prevFormData,
-                    [e.target.dataset.section]: {
-                        ...prevFormData[e.target.dataset.section],
-                        [name]: value
-                    }
-                }))
+
+    const handleAddInput = (cvItem, section) => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [section]: {
+                ...prevFormData[section],
+                [cvItem]: [...prevFormData[section][cvItem], ''] // Add empty input
+            }
+        }));
+    };
+
+    const handleRemoveEmptyInputs = (cvItem, section) => {
+        setFormData(prevFormData => {
+            const filteredArray = prevFormData[section][cvItem].filter(item => item.trim() !== '');
+            return {
+                ...prevFormData,
+                [section]: {
+                    ...prevFormData[section],
+                    [cvItem]: filteredArray // Keep only non-empty inputs
+                }
+            };
+        });
     };
 
     const handleSubmit = (section) => (e) => {
-        console.log(cvData)
-        console.log(formData)
         e.preventDefault();
-        setCvData(Array.isArray()
-            
-            prevCvData => ({
+
+        // Remove empty inputs before submitting
+        Object.keys(formData[section]).forEach((key) => {
+            if (Array.isArray(formData[section][key])) {
+                handleRemoveEmptyInputs(key, section);
+            }
+        });
+
+        setCvData(prevCvData => ({
             ...prevCvData,
             [section]: formData[section]
         }));
@@ -99,39 +130,43 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
                             <div key={key}>
                                 <label htmlFor={key}>{key}:</label>
                                 {Array.isArray(cvData[cvKey][key]) ? (
-                                cvData[cvKey][key].map((item, index) => (
-                                    <input
-                                        key={index}
-                                        id={item}
-                                        name={item}
-                                        type='textarea'
-                                        placeholder={cvData[cvKey][key][index]}
-                                        value={formData[cvKey][key][index]}
-                                        onChange={handleChange(key, index)}
-                                        data-section={cvKey}
-                                    />
-                                ))
-                            )
-                                : 
+                                <>
+                                    {formData[cvKey][key]?.map((item, index) => (
+                                        <input
+                                            key={index} // Using index as a key; if you need a more complex key, you can create unique IDs
+                                            id={item}
+                                            name={item}
+                                            type='text'
+                                            placeholder={cvData[cvKey][key][index]}
+                                            value={formData[cvKey][key][index] || ''}
+                                            onChange={handleChange(key, index)}
+                                            data-section={cvKey}
+                                        />
+                                    ))}
+                                    <button type="button" onClick={() => handleAddInput(key, cvKey)}>
+                                        Add New
+                                    </button>
+                                </>
+                            ) : (
                                 <input
                                     id={key}
                                     name={key}
                                     type={key === 'Email' ? 'email' : key === 'Phone' ? 'tel' : 'text'}
                                     placeholder={cvData[cvKey][key]}
-                                    value={formData[cvKey][key]}
+                                    value={formData[cvKey][key] || ''}
                                     onChange={handleChange(key)}
                                     data-section={cvKey}
-                                    />}
+                                />
+                            )}
                             </div>
                         ))}
-                         <input type='submit' value={cvKey} />
-                        </form>
+                        <input type='submit' value={cvKey} />
+                    </form>
                 </section>
             ))}
         </>
     );
 }
-
 
 function CVViewer({ cvData }) {
     return (
