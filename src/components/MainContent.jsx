@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function MainContent() {
 
@@ -8,43 +8,68 @@ export default function MainContent() {
             'Email': 'john.smith@gmail.com',
             'Phone': '07123456789'
         },
-        'Education Experience': {
-            'University/School': 'University of Life',
-            'Course/Subject': 'Computer Science',
-            'Responsibilities' : [
-                'Developed strong proficiency in programming languages such as Python, Java, and C++ through coursework and personal projects.', 
-                'Designed and implemented a database management system using SQL and NoSQL technologies for a university capstone project.', 
-                'Collaborated with a team to build a mobile application using React Native, enhancing both frontend and backend skills.'
-            ],
-        }
+        'Education Experience': [
+            {
+                'University/School': 'University of Life',
+                'Course/Subject': 'Computer Science',
+                'Responsibilities': ['Developed proficiency in programming...'],
+            },
+        ],
+        'Work Experience': [
+            {
+                'Company Name': 'Tech Corp',
+                'Position': 'Software Engineer',
+                'Responsibilities': ['Developed software applications...'],
+            },
+        ]
     });
 
-    const [formData, setFormData] = useState(null);
+    const [formData, setFormData] = useState({
+        'Personal Details': {
+            'Name': '',
+            'Email': '',
+            'Phone': ''
+        },
+        'Education Experience': [
+            {
+                'University/School': '',
+                'Course/Subject': '',
+                'Responsibilities': [],
+            },
+        ],
+        'Work Experience': [
+            {
+                'Company Name': '',
+                'Position': '',
+                'Responsibilities': [],
+            },
+        ]
+    });
 
-    // Sync formData with cvData when the component mounts
-    useEffect(() => {
-        const initializeFormData = () => {
-            const newFormData = {};
-            Object.keys(cvData).forEach((section) => {
-                newFormData[section] = {};
-                Object.keys(cvData[section]).forEach((key) => {
-                    if (Array.isArray(cvData[section][key])) {
-                        // Copy the array structure from cvData to formData
-                        newFormData[section][key] = [...cvData[section][key]];
-                    } else {
-                        newFormData[section][key] = '';  // Initialize other fields with empty strings
-                    }
-                });
-            });
-            setFormData(newFormData);
+    const handleAddNewSection = (sectionKey) => {
+        const emptySection = {
+            ...(sectionKey === 'Education Experience' && {
+                'University/School': '',
+                'Course/Subject': '',
+                'Responsibilities': []
+            }),
+            ...(sectionKey === 'Work Experience' && {
+                'Company Name': '',
+                'Position': '',
+                'Responsibilities': []
+            })
         };
 
-        initializeFormData();
-    }, [cvData]);
+        setCvData((prevData) => ({
+            ...prevData,
+            [sectionKey]: [...prevData[sectionKey], emptySection]
+        }));
 
-    if (!formData) {
-        return <div>Loading...</div>; // Ensure that formData is initialized before rendering
-    }
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [sectionKey]: [...prevFormData[sectionKey], emptySection]
+        }));
+    };
 
     return (
         <main>
@@ -53,71 +78,72 @@ export default function MainContent() {
                 setCvData={setCvData}
                 formData={formData}
                 setFormData={setFormData}
+                handleAddNewSection={handleAddNewSection}
             />
             <CVViewer cvData={cvData} />
         </main>
     );
 }
 
-function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
+function ControlsPanel({ cvData, setCvData, formData, setFormData, handleAddNewSection }) {
 
-    const handleChange = (cvItem, index) => (e) => {
+    const handleChange = (sectionKey, index, field) => (e) => {
         const { value } = e.target;
-
-        setFormData(prevFormData => {
-            const updatedArray = [
-                ...prevFormData[e.target.dataset.section][cvItem].slice(0, index),
-                value,
-                ...prevFormData[e.target.dataset.section][cvItem].slice(index + 1)
-            ];
-
-            return {
-                ...prevFormData,
-                [e.target.dataset.section]: {
-                    ...prevFormData[e.target.dataset.section],
-                    [cvItem]: updatedArray
-                }
-            };
-        });
-    };
-
-    const handleAddInput = (cvItem, section) => {
-        setFormData(prevFormData => ({
+        setFormData((prevFormData) => ({
             ...prevFormData,
-            [section]: {
-                ...prevFormData[section],
-                [cvItem]: [...prevFormData[section][cvItem], ''] // Add empty input
-            }
+            [sectionKey]: prevFormData[sectionKey].map((item, i) =>
+                i === index ? { ...item, [field]: value } : item
+            )
         }));
-    };
-
-    const handleRemoveEmptyInputs = (cvItem, section) => {
-        setFormData(prevFormData => {
-            const filteredArray = prevFormData[section][cvItem].filter(item => item.trim() !== '');
-            return {
-                ...prevFormData,
-                [section]: {
-                    ...prevFormData[section],
-                    [cvItem]: filteredArray // Keep only non-empty inputs
-                }
-            };
-        });
     };
 
     const handleSubmit = (section) => (e) => {
         e.preventDefault();
-
-        // Remove empty inputs before submitting
-        Object.keys(formData[section]).forEach((key) => {
-            if (Array.isArray(formData[section][key])) {
-                handleRemoveEmptyInputs(key, section);
-            }
-        });
-
-        setCvData(prevCvData => ({
+        setCvData((prevCvData) => ({
             ...prevCvData,
             [section]: formData[section]
         }));
+    };
+
+    const getSectionFields = (sectionKey, index) => {
+        switch (sectionKey) {
+            case 'Education Experience':
+                return (
+                    <>
+                        <label>University/School:</label>
+                        <input
+                            type="text"
+                            value={formData[sectionKey][index]?.['University/School'] || ''}
+                            onChange={handleChange(sectionKey, index, 'University/School')}
+                        />
+                        <label>Course/Subject:</label>
+                        <input
+                            type="text"
+                            value={formData[sectionKey][index]?.['Course/Subject'] || ''}
+                            onChange={handleChange(sectionKey, index, 'Course/Subject')}
+                        />
+                    </>
+                );
+            case 'Work Experience':
+                return (
+                    <>
+                        <label>Company Name:</label>
+                        <input
+                            type="text"
+                            value={formData[sectionKey][index]?.['Company Name'] || ''}
+                            onChange={handleChange(sectionKey, index, 'Company Name')}
+                        />
+                        <label>Position:</label>
+                        <input
+                            type="text"
+                            value={formData[sectionKey][index]?.['Position'] || ''}
+                            onChange={handleChange(sectionKey, index, 'Position')}
+                        />
+                    </>
+                );
+            default:
+                return null;
+        }
     };
 
     return (
@@ -125,43 +151,43 @@ function ControlsPanel({ cvData, setCvData, formData, setFormData }) {
             {Object.keys(cvData).map((cvKey) => (
                 <section key={cvKey}>
                     <h2>{cvKey}:</h2>
-                    <form onSubmit={handleSubmit(cvKey)}>
-                        {Object.keys(cvData[cvKey]).map((key) => (
-                            <div key={key}>
-                                <label htmlFor={key}>{key}:</label>
-                                {Array.isArray(cvData[cvKey][key]) ? (
-                                <>
-                                    {formData[cvKey][key]?.map((item, index) => (
-                                        <input
-                                            key={index} // Using index as a key; if you need a more complex key, you can create unique IDs
-                                            id={item}
-                                            name={item}
-                                            type='text'
-                                            placeholder={cvData[cvKey][key][index]}
-                                            value={formData[cvKey][key][index] || ''}
-                                            onChange={handleChange(key, index)}
-                                            data-section={cvKey}
-                                        />
-                                    ))}
-                                    <button type="button" onClick={() => handleAddInput(key, cvKey)}>
-                                        Add New
-                                    </button>
-                                </>
-                            ) : (
-                                <input
-                                    id={key}
-                                    name={key}
-                                    type={key === 'Email' ? 'email' : key === 'Phone' ? 'tel' : 'text'}
-                                    placeholder={cvData[cvKey][key]}
-                                    value={formData[cvKey][key] || ''}
-                                    onChange={handleChange(key)}
-                                    data-section={cvKey}
-                                />
-                            )}
-                            </div>
-                        ))}
-                        <input type='submit' value={cvKey} />
-                    </form>
+                    {Array.isArray(cvData[cvKey]) ? (
+                        cvData[cvKey].map((section, index) => (
+                            <form key={index} onSubmit={handleSubmit(cvKey)}>
+                                {getSectionFields(cvKey, index)}
+                                {/* Responsibilities would be handled here similarly */}
+                                <input type="submit" value="Save Section" />
+                            </form>
+                        ))
+                    ) : (
+                        <form onSubmit={handleSubmit(cvKey)}>
+                            {/* Rendering Personal Details */}
+                            {Object.keys(cvData[cvKey]).map((fieldKey) => (
+                                <div key={fieldKey}>
+                                    <label>{fieldKey}:</label>
+                                    <input
+                                        type={fieldKey === 'Email' ? 'email' : fieldKey === 'Phone' ? 'tel' : 'text'}
+                                        value={formData[cvKey][fieldKey]}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            [cvKey]: {
+                                                ...formData[cvKey],
+                                                [fieldKey]: e.target.value
+                                            }
+                                        })}
+                                    />
+                                </div>
+                            ))}
+                            <input type="submit" value="Save Personal Details" />
+                        </form>
+                    )}
+
+                    {/* Add "Add New Section" button for sections that are arrays */}
+                    {cvKey !== 'Personal Details' && (
+                        <button type="button" onClick={() => handleAddNewSection(cvKey)}>
+                            Add New {cvKey} Section
+                        </button>
+                    )}
                 </section>
             ))}
         </>
@@ -172,11 +198,33 @@ function CVViewer({ cvData }) {
     return (
         <section>
             <h2>CV Preview</h2>
-            {Object.keys(cvData['Personal Details']).map((key) => (
-                <p key={key}><strong>{key}:</strong> {cvData['Personal Details'][key]}</p>
-            ))}
-            {Object.keys(cvData['Education Experience']).map((key) => (
-                <p key={key}><strong>{key}:</strong> {cvData['Education Experience'][key]}</p>
+            {Object.keys(cvData).map((cvKey) => (
+                <div key={cvKey}>
+                    <h3>{cvKey}:</h3>
+                    {Array.isArray(cvData[cvKey]) ? (
+                        cvData[cvKey].map((item, index) => (
+                            <div key={index}>
+                                {cvKey === 'Education Experience' && (
+                                    <>
+                                        <p><strong>University/School:</strong> {item['University/School']}</p>
+                                        <p><strong>Course/Subject:</strong> {item['Course/Subject']}</p>
+                                    </>
+                                )}
+                                {cvKey === 'Work Experience' && (
+                                    <>
+                                        <p><strong>Company Name:</strong> {item['Company Name']}</p>
+                                        <p><strong>Position:</strong> {item['Position']}</p>
+                                    </>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        // Rendering Personal Details here
+                        Object.keys(cvData[cvKey]).map((fieldKey) => (
+                            <p key={fieldKey}><strong>{fieldKey}:</strong> {cvData[cvKey][fieldKey]}</p>
+                        ))
+                    )}
+                </div>
             ))}
         </section>
     );
