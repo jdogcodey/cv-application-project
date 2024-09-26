@@ -6,10 +6,23 @@ import CVview from './CVview';
 
 export default function MainContent() {
     return <>
-    <Personalinfo />
-    <Eduexperience />
-    <Jobexperience />
-    <CVview />
+    <section>
+        <section>
+            <h2>Personal Details:</h2>
+            <Personalinfo />
+        </section>
+        <section>
+            <h2>Education:</h2>
+            <Eduexperience />
+        </section>
+        <section>
+            <h2>Work Experience:</h2>
+            <Jobexperience />
+        </section>
+    </section>
+    <section>
+        <CVview />
+    </section>
     </>
 }
 
