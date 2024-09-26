@@ -1,0 +1,35 @@
+{
+    "Personal Details" : {
+        "First Name" : "John",
+        "Second Name" : "Smith",
+        "Email" : "john.smith@email.com",
+        "Number" : "7123456789"
+    },
+    "Educational Experience" : [
+        {
+            "School" : "University of Life",
+            "Course" : "React/Javascript",
+            "Date" : "2000-01-13"
+        }
+    ],
+    "Practical Experience" : [
+        {
+            "Company" : "The Odin Project",
+            "Position" : "CEO",
+            "Date-start" : "2000-01-14",
+            "Date-finish" : "2024-09-26",
+            "Responsibilities" : [
+                "Develop and implement high-level strategies and company policies.",
+                "Lead and guide the organization towards achieving its mission and vision.",
+                "Oversee the company’s financial performance, investments, and other business ventures.",
+                "Build and maintain a strong leadership team through recruitment and development.",
+                "Foster relationships with stakeholders, including shareholders, investors, and business partners.",
+                "Ensure compliance with legal and regulatory requirements across the organization.",
+                "Make key decisions regarding the company's direction, growth, and resource allocation.",
+                "Monitor industry trends and market conditions to adjust company strategies accordingly.",
+                "Represent the company in public forums, speaking engagements, and media interactions.",
+                "Collaborate with the board of directors to establish long-term goals and performance metrics."
+            ]
+        }
+    ]
+}
