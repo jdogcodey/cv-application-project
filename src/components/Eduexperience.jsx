@@ -5,7 +5,13 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
 
     const updateDetail = (e, index) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({...prevData[index], [name] : value}))
+        const updatedData = [...formData];
+
+        updatedData[index] = {
+            ...updatedData[index], 
+            [name] : value
+        };
+        setFormData(updatedData)
     };
 
     const eduUpdate = (e) => {
@@ -17,11 +23,12 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
     {formData.map((item, index) => (
         <form onSubmit={eduUpdate} key={index}>
             <label htmlFor='School'>University:</label>
-            <input type='text' id='School' name='School' placeholder={item['School']} onChange={updateDetail}></input>
+            <input type='text' id='School' name='School' placeholder={item['School']} onChange={(e) => updateDetail(e, index)}></input>
             <label htmlFor='Course'>Course:</label>
-            <input type='text' id='Course' name='Course' placeholder={item['Course']} onChange={updateDetail}></input>
+            <input type='text' id='Course' name='Course' placeholder={item['Course']} onChange={(e) => updateDetail(e, index)}></input>
             <label htmlFor='Date'>Date:</label>
-            <input type='date' id='Date' name='Date' placeholder={item['Date']} onChange={updateDetail}></input>
+            <input type='date' id='Date' name='Date' placeholder={item['Date']} onChange={(e) => updateDetail(e, index)}></input>
+            <input type='submit' value='Update'></input>
         </form>
     ))}
         
