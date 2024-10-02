@@ -29,6 +29,13 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
             'Date' : '2000-00-00'
         }
         setFormData(updatedData)
+    };
+
+    const removeItem = (indexToRemove) => {
+        const updatedItems = [...formData];
+
+        updatedItems.splice(indexToRemove, 1);
+        setFormData(updatedItems);
     }
     return <>
     {formData.map((item, index) => (
@@ -40,7 +47,8 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
             <label htmlFor='Date'>Date:</label>
             <input type='date' id='Date' name='Date' placeholder={item['Date']} onChange={(e) => updateDetail(e, index)}></input>
             <input type='submit' value='Update'></input>
-            {index === formData.length - 1 && <button onClick={(e) => addIndex(e, index)}>Add New</button>}
+            {index > 0 && <button onClick={(e) => removeItem(index)}>Remove</button>}
+            {index === formData.length - 1 && <button onClick={() => addIndex(index)}>Add New</button>}
         </form>
     ))}
         
