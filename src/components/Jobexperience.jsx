@@ -79,6 +79,19 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         setFormData(updatedItems);
         setEditedStatus((prevStatus) => prevStatus.filter((_, index) => index !== indexToRemove))
         setWorkExperience(updatedItems)
+    };
+
+    const removeResp = (formIndex, respIndex) => {
+        const updatedItems = [...formData];
+
+        updatedItems[formIndex]['Responsibilities'].splice(respIndex, 1);
+        setFormData(updatedItems);
+        setEditedStatus((prevStatus) => {
+            const newStatus = [...prevStatus];
+            newStatus[formIndex]['Responsibilities'].splice(respIndex, 1);
+            return newStatus
+        });
+        setWorkExperience(updatedItems);
     }
 
     return <>
@@ -96,6 +109,8 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
                     <div key={respIndex}>
                     <label htmlFor={respIndex}>{`Responsibility ${respIndex + 1}`}</label>
                     <input type='textarea' id={respIndex} name={respIndex} placeholder={item['Responsibilities'][respIndex]} value={editedStatus[index]['Responsibilities'][respIndex] ? item['Responsibilities'][respIndex] : ''} onChange={(e) => updateResponsibility(e, index, respIndex)}></input>
+                    {formData[index]['Responsibilities'].length > 1 && <button onClick={() => removeResp(index, respIndex)}>Remove</button>}
+                    {}
                     </ div>
                 ))}
                 <input type='submit' value='Update'></input>
