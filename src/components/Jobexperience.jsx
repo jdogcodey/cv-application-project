@@ -6,8 +6,8 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Company' : false,
         'Position' : false,
         'Date-start' : false,
-        'Date-end' : false,
-        'Responsibilities' : []
+        'Date-finish' : false,
+        'Responsibilities' : false
     }));
 
     const updateDetail = (e, index) => {
@@ -39,19 +39,23 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         const updatedData = [...formData];
 
         updatedData.push({
-        'Company' : false,
-        'Position' : false,
-        'Date-start' : false,
-        'Date-end' : false,
-        'Responsibilities' : []
+        'Company' : 'New Company',
+        'Position' : 'New Position',
+        'Date-start' : '2000-00-00',
+        'Date-finish' : '2020-00=00',
+        'Responsibilities' : [
+            'Responsibility 1',
+            'Responsibility 2',
+            'Responsibility 3s'
+        ]
     })
     setFormData(updatedData);
     setEditedStatus((prevStatus) => [...prevStatus, {
         'Company' : false,
         'Position' : false,
         'Date-start' : false,
-        'Date-end' : false,
-        'Responsibilities' : []
+        'Date-finish' : false,
+        'Responsibilities' : false
     }])
     };
 

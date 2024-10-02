@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function CVview({ personalInfo, eduExperience }) {
+export default function CVview({ personalInfo, eduExperience, workExperience }) {
     return <>
     <p>{personalInfo['First Name']}</p>
     <p>{eduExperience[0]['School']}</p>
@@ -18,5 +18,21 @@ export default function CVview({ personalInfo, eduExperience }) {
     {eduExperience[4] && <p>{eduExperience[4]['School']}</p>}
     {eduExperience[4] && <p>{eduExperience[4]['Course']}</p>}
     {eduExperience[4] && <p>{eduExperience[4]['Date']}</p>}
+    <p>{workExperience[0]['Company']}</p>
+    <p>{workExperience[0]['Position']}</p>
+    <p>{workExperience[0]['Date-start']}</p>
+    <p>{workExperience[0]['Date-finish']}</p>
+    {workExperience[1] && <p>{workExperience[1]['Company']}</p>}
+    {workExperience[1] && <p>{workExperience[1]['Position']}</p>}
+    {workExperience[1] && <p>{workExperience[1]['Date-start']}</p>}
+    {workExperience[1] && <p>{workExperience[1]['Date-finish']}</p>}
+    {workExperience[2] && <p>{workExperience[2]['Company']}</p>}
+    {workExperience[2] && <p>{workExperience[2]['Position']}</p>}
+    {workExperience[2] && <p>{workExperience[2]['Date-start']}</p>}
+    {workExperience[2] && <p>{workExperience[2]['Date-finish']}</p>}
+    {workExperience[3] && <p>{workExperience[3]['Company']}</p>}
+    {workExperience[3] && <p>{workExperience[3]['Position']}</p>}
+    {workExperience[3] && <p>{workExperience[3]['Date-start']}</p>}
+    {workExperience[3] && <p>{workExperience[3]['Date-finish']}</p>}
     </>
 }

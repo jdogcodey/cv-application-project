@@ -55,6 +55,7 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
         updatedItems.splice(indexToRemove, 1);
         setFormData(updatedItems);
         setEditedStatus((prevStatus) => prevStatus.filter((_, index) => index !== indexToRemove))
+        setEduExperience(updatedItems)
     }
     return <>
     {formData.map((item, index) => (
