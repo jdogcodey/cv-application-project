@@ -94,7 +94,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
                 <input type='date' id='Date-finish' name='Date-finish' placeholder={item['Date-finish']} value={editedStatus[index]['Date-finish'] ? item['Date-finish'] : ''} onChange={(e) => updateDetail(e, index)}></input>
                 {formData[index]['Responsibilities'].map((respItem, respIndex) => (
                     <div key={respIndex}>
-                    <label htmlFor={respIndex}>{`Responsibility ${respIndex}`}</label>
+                    <label htmlFor={respIndex}>{`Responsibility ${respIndex + 1}`}</label>
                     <input type='textarea' id={respIndex} name={respIndex} placeholder={item['Responsibilities'][respIndex]} value={editedStatus[index]['Responsibilities'][respIndex] ? item['Responsibilities'][respIndex] : ''} onChange={(e) => updateResponsibility(e, index, respIndex)}></input>
                     </ div>
                 ))}
