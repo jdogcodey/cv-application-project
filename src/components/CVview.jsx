@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function CVview({ personalInfo, eduExperience, workExperience }) {
     return <>
-    <p>{personalInfo['First Name']}</p>
+    {/* <p>{personalInfo['First Name']}</p>
     <p>{eduExperience[0]['School']}</p>
     <p>{eduExperience[0]['Course']}</p>
     <p>{eduExperience[0]['Date']}</p>
@@ -33,6 +33,13 @@ export default function CVview({ personalInfo, eduExperience, workExperience }) 
     {workExperience[3] && <p>{workExperience[3]['Company']}</p>}
     {workExperience[3] && <p>{workExperience[3]['Position']}</p>}
     {workExperience[3] && <p>{workExperience[3]['Date-start']}</p>}
-    {workExperience[3] && <p>{workExperience[3]['Date-finish']}</p>}
+    {workExperience[3] && <p>{workExperience[3]['Date-finish']}</p>} */}
+    {/* {workExperience[0]['Responsibilities'][0]}
+    {workExperience[0]['Responsibilities'][1]}
+    {workExperience[0]['Responsibilities'][2]}
+    {workExperience[0]['Responsibilities'][3]}
+    {workExperience[0]['Responsibilities'][4]} */}
+    {workExperience[1]?.['Responsibilities']?.[0] && <p>{workExperience[1]['Responsibilities'][0]}</p>}
+    {workExperience[1]?.['Responsibilities']?.[1] && <p>{workExperience[1]['Responsibilities'][1]}</p>}
     </>
 }
