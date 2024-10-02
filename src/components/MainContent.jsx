@@ -8,6 +8,7 @@ import data from './Basedata.json'
 export default function MainContent() {
     let cvData = data;
     const [currentPersonalInfo, setPersonalInfo] = useState(cvData['Personal Details']);
+    const [currentEduExperience, setEduExperience] = useState(cvData['Educational Experience']);
     return <>
     <section>
         <section>
@@ -16,7 +17,7 @@ export default function MainContent() {
         </section>
         <section>
             <h2>Education:</h2>
-            <Eduexperience />
+            <Eduexperience eduExperience={currentEduExperience} setEduExperience={setEduExperience}/>
         </section>
         <section>
             <h2>Work Experience:</h2>
