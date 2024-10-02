@@ -18,6 +18,17 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
         e.preventDefault();
         setEduExperience(formData);
         console.log(formData);
+    };
+
+    const addIndex = (e, index) => {
+        const updatedData =[...formData];
+
+        updatedData[index + 1] = {
+            'School' : 'New University',
+            'Course' : 'New Course',
+            'Date' : '2000-00-00'
+        }
+        setFormData(updatedData)
     }
     return <>
     {formData.map((item, index) => (
@@ -29,6 +40,7 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
             <label htmlFor='Date'>Date:</label>
             <input type='date' id='Date' name='Date' placeholder={item['Date']} onChange={(e) => updateDetail(e, index)}></input>
             <input type='submit' value='Update'></input>
+            {index === formData.length - 1 && <button onClick={(e) => addIndex(e, index)}>Add New</button>}
         </form>
     ))}
         
