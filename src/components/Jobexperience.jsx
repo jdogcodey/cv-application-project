@@ -58,7 +58,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Responsibilities' : [
             'Responsibility 1',
             'Responsibility 2',
-            'Responsibility 3s'
+            'Responsibility 3'
         ]
     })
     setFormData(updatedData);
