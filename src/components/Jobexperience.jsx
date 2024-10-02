@@ -7,7 +7,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Position' : false,
         'Date-start' : false,
         'Date-end' : false,
-        'Responsibilities' : false
+        'Responsibilities' : []
     }));
 
     const updateDetail = (e, index) => {
@@ -43,7 +43,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Position' : false,
         'Date-start' : false,
         'Date-end' : false,
-        'Responsibilities' : false
+        'Responsibilities' : []
     })
     setFormData(updatedData);
     setEditedStatus((prevStatus) => [...prevStatus, {
@@ -51,7 +51,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Position' : false,
         'Date-start' : false,
         'Date-end' : false,
-        'Responsibilities' : false
+        'Responsibilities' : []
     }])
     };
 
