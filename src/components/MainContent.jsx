@@ -9,6 +9,8 @@ export default function MainContent() {
     let cvData = data;
     const [currentPersonalInfo, setPersonalInfo] = useState(cvData['Personal Details']);
     const [currentEduExperience, setEduExperience] = useState(cvData['Educational Experience']);
+    const [currentWorkExperience, setWorkExperience] = useState(cvData['Practical Experience'])
+
     return <>
     <section>
         <section>
@@ -21,7 +23,7 @@ export default function MainContent() {
         </section>
         <section>
             <h2>Work Experience:</h2>
-            <Jobexperience />
+            <Jobexperience workExperience={currentWorkExperience} setWorkExperience={setWorkExperience}/>
         </section>
     </section>
     <section>
