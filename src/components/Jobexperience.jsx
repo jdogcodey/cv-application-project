@@ -57,6 +57,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Date-finish' : false,
         'Responsibilities' : false
     }])
+    setWorkExperience(updatedData)
     };
 
     const removeItem = (indexToRemove) => {
@@ -65,6 +66,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         updatedItems.splice(indexToRemove, 1);
         setFormData(updatedItems);
         setEditedStatus((prevStatus) => prevStatus.filter((_, index) => index !== indexToRemove))
+        setWorkExperience(updatedItems)
     }
 
     return <>
