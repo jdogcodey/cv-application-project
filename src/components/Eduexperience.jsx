@@ -23,11 +23,11 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
     const addIndex = (e, index) => {
         const updatedData =[...formData];
 
-        updatedData[index + 1] = {
+        updatedData.push({
             'School' : 'New University',
             'Course' : 'New Course',
             'Date' : '2000-00-00'
-        }
+        })
         setFormData(updatedData)
     };
 
