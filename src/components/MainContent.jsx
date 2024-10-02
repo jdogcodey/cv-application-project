@@ -3,13 +3,16 @@ import Personalinfo from './Personalinfo';
 import Eduexperience from './Eduexperience';
 import Jobexperience from './Jobexperience';
 import CVview from './CVview';
+import data from './Basedata.json'
 
 export default function MainContent() {
+    let cvData = data;
+    const [currentPersonalInfo, setPersonalInfo] = useState(cvData['Personal Details']);
     return <>
     <section>
         <section>
             <h2>Personal Details:</h2>
-            <Personalinfo />
+            <Personalinfo personalInfo={currentPersonalInfo} setPersonalInfo={setPersonalInfo}/>
         </section>
         <section>
             <h2>Education:</h2>
@@ -21,7 +24,7 @@ export default function MainContent() {
         </section>
     </section>
     <section>
-        <CVview />
+        <CVview personalInfo={currentPersonalInfo}/>
     </section>
     </>
 }

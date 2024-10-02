@@ -1,7 +1,7 @@
 {
     "Personal Details" : {
         "First Name" : "John",
-        "Second Name" : "Smith",
+        "Surname" : "Smith",
         "Email" : "john.smith@email.com",
         "Number" : "7123456789"
     },

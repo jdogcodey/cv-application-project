@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export default function CVview() {
+export default function CVview({personalInfo}) {
     return <>
-    <p>
-        CV view</p></>
+    <p>{personalInfo['First Name']}</p>
+    </>
 }
