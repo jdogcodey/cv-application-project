@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../index.css'
 
 export default function Personalinfo({ personalInfo, setPersonalInfo }) {
     const [formData, setFormData] = useState(personalInfo);

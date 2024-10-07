@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../index.css';
 
 export default function Eduexperience({ eduExperience, setEduExperience }) {
     const [formData, setFormData] = useState(eduExperience);

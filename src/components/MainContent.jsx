@@ -3,7 +3,8 @@ import Personalinfo from './Personalinfo';
 import Eduexperience from './Eduexperience';
 import Jobexperience from './Jobexperience';
 import CVview from './CVview';
-import data from './Basedata.json'
+import data from './Basedata.json';
+import '../index.css';
 
 export default function MainContent() {
     let cvData = data;
@@ -14,9 +15,8 @@ export default function MainContent() {
 
 
 
-    return <>
+    return <main>
     <section>
-        
         <section>
             <h2>Personal Details:</h2>
             {currentSection === 1 && <>
@@ -45,6 +45,6 @@ export default function MainContent() {
     <section>
         <CVview personalInfo={currentPersonalInfo} eduExperience={currentEduExperience} workExperience={currentWorkExperience}/>
     </section>
-    </>
+    </main>
 }
 

@@ -1,0 +1,46 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 16px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #295F98;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+}
+
+main {
+    flex-grow: 1;
+    background-color: #CDC2A5;
+}
+
+footer {
+    background-color: #EAE4DD;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+/* Design for phones */
+@media (max-width: 500px) {
+
+}
+
+/* Design for tablets */
+@media (max-width: 1000px) {
+
+}
+
+

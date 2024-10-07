@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../index.css';
 
 export default function Jobexperience({ workExperience, setWorkExperience }) {
     const [formData, setFormData] = useState(workExperience);
