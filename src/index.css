@@ -53,7 +53,7 @@ button:hover {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #F2E5BF;
     text-shadow:
         1px -1px 0 #CB6040;
@@ -69,6 +69,14 @@ h2, h3 {
     color: #FD8B51;
 }
 
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-
+}
+
 #left, #right {
     background-color: #ffffff;
     border-radius: 10px;
@@ -82,7 +90,15 @@ h2, h3 {
     color: #F2E5BF;
     border-radius: 5px;
     border: 1px solid #257180;
-    box-shadow: none;
+    padding: 3px;
+    margin: 3px;
+}
+
+.regButton:hover {
+    background-color: #F2E5BF;
+    color: #CB6040;
+    border-radius: 5px;
+    border: 1px solid #257180;
     padding: 3px;
     margin: 3px;
 }
@@ -93,6 +109,66 @@ h2, h3 {
 
 #right {
     flex: 2;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form span {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+#resTitle {
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.resDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+    overflow-x: auto;
+    min-height: 50px;
+}
+
+
+#nameCV, #email-phone {
+    text-align: center;
+}
+
+#email-phone {
+    font-weight: 600;
+}
+
+.orangeDot {
+    color: #FD8B51;
+}
+
+.schoolCV, .positionCV {
+    margin-bottom: 5px;
+}
+
+.courseCV, .companyCV, .dateCV {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#CVview section {
+    border-bottom: solid 1px#CB6040;
+    margin-bottom: 10px;
+}
+
+.respItem, .respItem p {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 /* Design for phones */

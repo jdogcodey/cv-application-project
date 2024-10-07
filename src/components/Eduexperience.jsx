@@ -62,14 +62,23 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
     return <>
     {formData.map((item, index) => (
         <form onSubmit={eduUpdate} key={index}>
-            <label htmlFor='School'>University:</label>
-            <input type='text' id='School' name='School' placeholder={item['School']} value={editedStatus[index]['School'] ? item['School'] : ''} onChange={(e) => updateDetail(e, index)}></input>
-            <label htmlFor='Course'>Course:</label>
-            <input type='text' id='Course' name='Course' placeholder={item['Course']} value={editedStatus[index]['Course'] ? item['Course']  : ''} onChange={(e) => updateDetail(e, index)}></input>
-            <label htmlFor='Date'>Date:</label>
-            <input type='date' id='Date' name='Date' placeholder={item['Date']} value={editedStatus[index]['Date'] ? item['Date']  : ''} onChange={(e) => updateDetail(e, index)}></input>
-            <input className='regButton' type='submit' value='Update'></input>
-            {formData.length > 1 && <button className='regButton' onClick={() => removeItem(index)}>Remove</button>}
+            <span>
+                <label htmlFor='School'>University:</label>
+                <input type='text' id='School' name='School' placeholder={item['School']} value={editedStatus[index]['School'] ? item['School'] : ''} onChange={(e) => updateDetail(e, index)}></input>
+            </span>
+            <span>
+                <label htmlFor='Course'>Course:</label>
+                <input type='text' id='Course' name='Course' placeholder={item['Course']} value={editedStatus[index]['Course'] ? item['Course']  : ''} onChange={(e) => updateDetail(e, index)}></input>
+            </span>
+            <span>
+                <label htmlFor='Date'>Date:</label>
+                <input type='date' id='Date' name='Date' placeholder={item['Date']} value={editedStatus[index]['Date'] ? item['Date']  : ''} onChange={(e) => updateDetail(e, index)}></input>
+            </span>
+            <span>
+                <input className='regButton' type='submit' value='Update'></input>
+                {formData.length > 1 && <button className='regButton' onClick={() => removeItem(index)}>Remove</button>}
+            </span>
+            
             {index === formData.length - 1 && <button className='regButton' onClick={() => addIndex(index)}>Add New</button>}
         </form>
     ))}

@@ -55,7 +55,7 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
         'Company' : 'New Company',
         'Position' : 'New Position',
         'Date-start' : '2000-00-00',
-        'Date-finish' : '2020-00=00',
+        'Date-finish' : '2020-00-00',
         'Responsibilities' : [
             'Responsibility 1',
             'Responsibility 2',
@@ -106,20 +106,31 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
     return <>
         {formData.map((item, index) => (
             <form onSubmit={workUpdate} key={index}>
-                <label htmlFor='Company'>Company:</label>
-                <input type='text' id='Company' name='Company' placeholder={item['Company']} value={editedStatus[index]['Company'] ? item['Company'] : ''} onChange={(e) => updateDetail(e, index)}></input>
-                <label htmlFor='Position'>Position:</label>
-                <input type='text' id='Position' name='Position' placeholder={item['Position']} value={editedStatus[index]['Position'] ? item['Position'] : ''} onChange={(e) => updateDetail(e, index)}></input>
-                <label htmlFor='Date-start'>Start Date:</label>
-                <input type='date' id='Date-start' name='Date-start' placeholder={item['Date-start']} value={editedStatus[index]['Date-start'] ? item['Date-start'] : ''} onChange={(e) => updateDetail(e, index)}></input>
-                <label htmlFor='Date-finish'>End Date:</label>
-                <input type='date' id='Date-finish' name='Date-finish' placeholder={item['Date-finish']} value={editedStatus[index]['Date-finish'] ? item['Date-finish'] : ''} onChange={(e) => updateDetail(e, index)}></input>
+                <span>
+                    <label htmlFor='Company'>Company:</label>
+                    <input type='text' id='Company' name='Company' placeholder={item['Company']} value={editedStatus[index]['Company'] ? item['Company'] : ''} onChange={(e) => updateDetail(e, index)}></input>
+                </span>
+                <span>
+                    <label htmlFor='Position'>Position:</label>
+                    <input type='text' id='Position' name='Position' placeholder={item['Position']} value={editedStatus[index]['Position'] ? item['Position'] : ''} onChange={(e) => updateDetail(e, index)}></input>
+                </span>
+                <span>
+                    <label htmlFor='Date-start'>Start Date:</label>
+                    <input type='date' id='Date-start' name='Date-start' placeholder={item['Date-start']} value={editedStatus[index]['Date-start'] ? item['Date-start'] : ''} onChange={(e) => updateDetail(e, index)}></input>
+                </span>
+                <span>
+                    <label htmlFor='Date-finish'>End Date:</label>
+                    <input type='date' id='Date-finish' name='Date-finish' placeholder={item['Date-finish']} value={editedStatus[index]['Date-finish'] ? item['Date-finish'] : ''} onChange={(e) => updateDetail(e, index)}></input>
+                </span>
+                <p id='resTitle'>Responsibilities:</p>
                 {formData[index]['Responsibilities'].map((respItem, respIndex) => (
-                    <div key={respIndex}>
-                    <label htmlFor={respIndex}>{`Responsibility ${respIndex + 1}:`}</label>
-                    <input type='textarea' id={respIndex} name={respIndex} placeholder={item['Responsibilities'][respIndex]} value={editedStatus[index]['Responsibilities'][respIndex] ? item['Responsibilities'][respIndex] : ''} onChange={(e) => updateResponsibility(e, index, respIndex)}></input>
-                    {formData[index]['Responsibilities'].length > 1 && <button className='regButton' onClick={() => removeResp(index, respIndex)}>Remove</button>}
-                    {respIndex === formData[index]['Responsibilities'].length - 1 && <button className='regButton' onClick={(e) => addResponsibility(e, index, respIndex)}>Add New Responsibility</button>}
+                    <div className='resDiv' key={respIndex}>
+                        <span>
+                            <label htmlFor={respIndex}>{`${respIndex + 1}.`}</label>
+                            <textarea id={respIndex} name={respIndex} placeholder={item['Responsibilities'][respIndex]} value={editedStatus[index]['Responsibilities'][respIndex] ? item['Responsibilities'][respIndex] : ''} onChange={(e) => updateResponsibility(e, index, respIndex)}/>
+                        </span>
+                        {formData[index]['Responsibilities'].length > 1 && <button className='regButton' onClick={() => removeResp(index, respIndex)}>Remove</button>}
+                        {respIndex === formData[index]['Responsibilities'].length - 1 && <button className='regButton' onClick={(e) => addResponsibility(e, index, respIndex)}>Add New Responsibility</button>}
                     </ div>
                 ))}
                 <input className='regButton' type='submit' value='Update'></input>
