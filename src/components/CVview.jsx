@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 
 export default function CVview({ personalInfo, eduExperience, workExperience }) {
     return <>
+    <h2>{`${personalInfo['First Name']} ${personalInfo['Surname']}`}</h2>
+    <p>{`${personalInfo['Email']} • +44${personalInfo['Number']}`}</p>
+    
     {/* <p>{personalInfo['First Name']}</p>
     <p>{eduExperience[0]['School']}</p>
     <p>{eduExperience[0]['Course']}</p>
