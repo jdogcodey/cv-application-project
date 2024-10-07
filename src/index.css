@@ -33,6 +33,9 @@ main {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+
 }
 
 footer {
@@ -50,17 +53,36 @@ button:hover {
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    color: #F2E5BF;
+    text-shadow:
+        1px -1px 0 #CB6040;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-h1, h2, h3 {
+#github-logo {
+    filter: invert(41%) sepia(96%) saturate(618%) hue-rotate(333deg) brightness(88%) contrast(77%);
+}
+
+h2, h3 {
     color: #FD8B51;
 }
 
 #left, #right {
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 10px;
+    border: 1px solid #CB6040;
+    padding: 5px 30px;
+    margin: 20px;
+}
+
+#left {
+    flex: 1
+}
+
+#right {
+    flex: 2;
 }
 
 /* Design for phones */
