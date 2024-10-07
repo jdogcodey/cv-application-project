@@ -68,9 +68,9 @@ export default function Eduexperience({ eduExperience, setEduExperience }) {
             <input type='text' id='Course' name='Course' placeholder={item['Course']} value={editedStatus[index]['Course'] ? item['Course']  : ''} onChange={(e) => updateDetail(e, index)}></input>
             <label htmlFor='Date'>Date:</label>
             <input type='date' id='Date' name='Date' placeholder={item['Date']} value={editedStatus[index]['Date'] ? item['Date']  : ''} onChange={(e) => updateDetail(e, index)}></input>
-            <input type='submit' value='Update'></input>
-            {formData.length > 1 && <button onClick={() => removeItem(index)}>Remove</button>}
-            {index === formData.length - 1 && <button onClick={() => addIndex(index)}>Add New</button>}
+            <input className='regButton' type='submit' value='Update'></input>
+            {formData.length > 1 && <button className='regButton' onClick={() => removeItem(index)}>Remove</button>}
+            {index === formData.length - 1 && <button className='regButton' onClick={() => addIndex(index)}>Add New</button>}
         </form>
     ))}
     </>

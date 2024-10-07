@@ -118,13 +118,13 @@ export default function Jobexperience({ workExperience, setWorkExperience }) {
                     <div key={respIndex}>
                     <label htmlFor={respIndex}>{`Responsibility ${respIndex + 1}:`}</label>
                     <input type='textarea' id={respIndex} name={respIndex} placeholder={item['Responsibilities'][respIndex]} value={editedStatus[index]['Responsibilities'][respIndex] ? item['Responsibilities'][respIndex] : ''} onChange={(e) => updateResponsibility(e, index, respIndex)}></input>
-                    {formData[index]['Responsibilities'].length > 1 && <button onClick={() => removeResp(index, respIndex)}>Remove</button>}
-                    {respIndex === formData[index]['Responsibilities'].length - 1 && <button onClick={(e) => addResponsibility(e, index, respIndex)}>Add New Responsibility</button>}
+                    {formData[index]['Responsibilities'].length > 1 && <button className='regButton' onClick={() => removeResp(index, respIndex)}>Remove</button>}
+                    {respIndex === formData[index]['Responsibilities'].length - 1 && <button className='regButton' onClick={(e) => addResponsibility(e, index, respIndex)}>Add New Responsibility</button>}
                     </ div>
                 ))}
-                <input type='submit' value='Update'></input>
-                {formData.length > 1 && <button onClick={() => removeItem(index)}>Remove</button>}
-                {index === formData.length - 1 && <button onClick={() => addIndex(index)}>Add New</button>}
+                <input className='regButton' type='submit' value='Update'></input>
+                {formData.length > 1 && <button className='regButton' onClick={() => removeItem(index)}>Remove</button>}
+                {index === formData.length - 1 && <button className='regButton' onClick={() => addIndex(index)}>Add New</button>}
             </form>
         ))}
     </>
