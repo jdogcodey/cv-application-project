@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
+import { format } from 'date-fns';
 
 export default function CVview({ personalInfo, eduExperience, workExperience }) {
+
+    function courseDate(x) {
+        const date = new Date(x);
+        const formattedDate = format(date, 'dd MMM yyyy');
+        return formattedDate;
+    }
+
     return <>
-    <h2>{`${personalInfo['First Name']} ${personalInfo['Surname']}`}</h2>
-    <p>{`${personalInfo['Email']} • +44${personalInfo['Number']}`}</p>
+    <section>
+        <h2>{`${personalInfo['First Name']} ${personalInfo['Surname']}`}</h2>
+        <p>{`${personalInfo['Email']} • +44${personalInfo['Number']}`}</p>  
+    </section>
+    <section>
+        {eduExperience.map((item, index) => (
+            <div key={item}>
+                <h3>{item['School']}</h3>
+                <p>{`${item['Course']} • ${courseDate(item['Date'])}`}</p>
+            </div>
+        ))}
+    </section>
     
     {/* <p>{personalInfo['First Name']}</p>
     <p>{eduExperience[0]['School']}</p>
