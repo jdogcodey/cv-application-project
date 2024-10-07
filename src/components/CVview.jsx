@@ -40,6 +40,11 @@ export default function CVview({ personalInfo, eduExperience, workExperience }) 
                 <h3>{item['Position']}</h3>
                 <h4>{item['Company']}</h4>
                 <p>{workDate(item['Date-start'], item['Date-finish'])}</p>
+                {workExperience[index]['Responsibilities'].map((respItem, respIndex) => (
+                    <div key={respItem + respIndex}>
+                        <p>{`• ${respItem}`}</p>
+                    </div>
+                ))}
             </div>
         ))}
     </section>
