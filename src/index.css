@@ -4,33 +4,63 @@ html, body {
     padding: 0;
     height: 100%;
     font-size: 16px;
+    max-width: 100%;
+    text-align: center;
 }
 
 #wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    text-align: left;
+    max-width: 2000px;
+    margin: 0 auto;
 }
 
 header {
-    background-color: #295F98;
+    background-color: #257180;
     display: flex;
     justify-content: space-between;
     padding: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
     align-items: center;
 }
 
 main {
     flex-grow: 1;
-    background-color: #CDC2A5;
+    background-color: #F2E5BF;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 footer {
-    background-color: #EAE4DD;
+    background-color: #CB6040;
+    text-align: center;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+button:hover {
+    font-weight: bold;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+}
+
+h1, h2, h3 {
+    color: #FD8B51;
+}
+
+#left, #right {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 /* Design for phones */

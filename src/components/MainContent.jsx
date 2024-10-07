@@ -16,7 +16,7 @@ export default function MainContent() {
 
 
     return <main>
-    <section>
+    <section id='left'>
         <section>
             <h2>Personal Details:</h2>
             {currentSection === 1 && <>
@@ -42,7 +42,7 @@ export default function MainContent() {
             {currentSection !== 3 && <button onClick={() => {setSection(3)}}>Edit</button>}
         </section>
     </section>
-    <section>
+    <section id='right'>
         <CVview personalInfo={currentPersonalInfo} eduExperience={currentEduExperience} workExperience={currentWorkExperience}/>
     </section>
     </main>
