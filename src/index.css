@@ -175,7 +175,7 @@ textarea {
     font-size: 0.6rem;
 }
 
-input {
+input, textarea {
     border: solid 1px #CB6040;
     border-radius: 5px;
 }
