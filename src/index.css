@@ -187,10 +187,20 @@ textarea {
         font-size: 1.5rem;
     }
 
-}
+    main {
+        padding-left: 5px;
+        padding-right: 5px;
+        flex-direction: column;
+    }
 
-/* Design for tablets */
-@media (max-width: 1000px) {
+    #left, #right {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
 
 }
 
