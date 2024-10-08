@@ -171,6 +171,10 @@ textarea {
     margin-bottom: 8px;
 }
 
+.format {
+    font-size: 0.6rem;
+}
+
 /* Design for phones */
 @media (max-width: 500px) {
 

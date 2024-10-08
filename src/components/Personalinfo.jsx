@@ -29,7 +29,7 @@ export default function Personalinfo({ personalInfo, setPersonalInfo }) {
                 <input type='email' id='Email' name='Email' placeholder={personalInfo['Email']} onChange={updateDetail}></input>
             </span>
             <span>
-                <label htmlFor='Number'>Phone: <span>Format +44(7123456789)</span>+44</label>
+                <label htmlFor='Number'>Phone: +44<span className='format'>Format +44(7123456789)</span></label>
                 <input type='tel' id='Number' name='Number' pattern='[0-9]{10}' placeholder={personalInfo['Number']} onChange={updateDetail}></input>
             </span>
             <input className='regButton' type='submit' value='Update'></input>
