@@ -178,6 +178,15 @@ textarea {
 /* Design for phones */
 @media (max-width: 500px) {
 
+    header {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
 }
 
 /* Design for tablets */
