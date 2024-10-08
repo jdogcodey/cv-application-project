@@ -175,6 +175,11 @@ textarea {
     font-size: 0.6rem;
 }
 
+input {
+    border: solid 1px #CB6040;
+    border-radius: 5px;
+}
+
 /* Design for phones */
 @media (max-width: 500px) {
 
